@@ -1,0 +1,35 @@
+---
+import type { CollectionEntry } from "astro:content";
+import Global from "./Global.astro";
+import DateFormatted from "../components/Date.astro";
+type Props = CollectionEntry<"blog">["data"];
+
+const { title, description, pubDate, updatedDate } = Astro.props;
+---
+
+<Global title={title} description={description}>
+    <div class="title">
+        <h1 class="title">{title}</h1>
+        <div class="date">
+            <DateFormatted date={pubDate} />
+            {
+                updatedDate && (
+                    <div class="last-updated-on">
+                        Last updated on {updatedDate.toDateString()}
+                    </div>
+                )
+            }
+        </div>
+        <hr />
+    </div>
+    <slot class="markdown" />
+</Global>
+<style>
+    .title h1 {
+        text-align: center;
+    }
+    .date {
+        text-align: right;
+        padding-right: 3%;
+    }
+</style>

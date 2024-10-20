@@ -1,16 +1,20 @@
 ---
-
+import Global from "../layouts/Global.astro";
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Global title="Home" description="Homepge of HALQME Portfolio and Blog page">
+    <element class="title">
+        <h1>Hello, Astro!</h1>
+    </element>
+    <h2>H2</h2>
+    <h3>H3</h3>
+    <h4>H4</h4>
+    <h5>H5</h5>
+    <h6>H6</h6>
+    <a href="/">HOME</a>
+    <h1>Article</h1>
+    <p>Article content</p>
+    <figcaption>Figcaption</figcaption>
+    <figure>Figure</figure>
+    <p>Welcome to your new Astro site.</p>
+</Global>

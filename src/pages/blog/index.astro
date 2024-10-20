@@ -1,0 +1,72 @@
+---
+import Global from "../../layouts/Global.astro";
+import Date from "../../components/Date.astro";
+import { getCollection } from "astro:content";
+const posts = (await getCollection("blog")).sort(
+    (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+---
+
+<Global title="Home" description="Homepge of HALQME Portfolio and Blog page">
+    <section>
+        <ul class="link-card-grid">
+            {
+                posts.map((post) => (
+                    <li class="link-card">
+                        <a href={`/blog/${post.slug}/`}>
+                            <element class="date">
+                                <Date date={post.data.pubDate} />
+                            </element>
+
+                            <element class="mdtitle">
+                                <h2>
+                                    {post.data.title}
+                                    <span />
+                                </h2>
+                            </element>
+
+                            <p>{post.data.description}</p>
+                        </a>
+                    </li>
+                ))
+            }
+        </ul>
+    </section>
+</Global>
+
+<style>
+    .link-card {
+        list-style: none;
+        display: flex;
+        border-radius: 7px;
+        transition: outline 1s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .link-card > a {
+        width: 80%;
+        text-decoration: none;
+        line-height: 1.4;
+        padding: calc(1.5rem - 1px);
+        color: var(--gray-400);
+    }
+    h2 {
+        padding-left: 4%;
+        margin: 0;
+        font-size: 1.25rem;
+        transition: color 3s cubic-bezier(0.22, 1, 0.36, 1);
+        background: var(--gradient-dark);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+    p {
+        margin-bottom: 0;
+    }
+    .link-card:is(:hover, :focus-within) h2 {
+        background: var(--gradient-accent);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+    .date {
+        padding-left: 1%;
+        color: var(--gray-600);
+    }
+</style>
