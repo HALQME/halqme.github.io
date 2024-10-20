@@ -1,0 +1,359 @@
+---
+// Learn about using Astro layouts:
+// https://docs.astro.build/en/core-concepts/layouts/
+
+// Component Imports
+import Head from "../components/Head.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+
+interface Props {
+    title?: string | undefined;
+    description?: string | undefined;
+}
+
+const { title, description } = Astro.props;
+---
+
+<html lang="ja">
+    <head>
+        <Head title={title} description={description} />
+    </head>
+    <body>
+        <Header />
+        <main>
+            <slot />
+        </main>
+        <Footer />
+    </body>
+</html>
+<style is:global>
+    /* Global variables */
+    :root {
+        color-scheme: light dark;
+        /* Colors */
+        --gray-0: rgb(29, 27, 86);
+        --gray-50: rgb(48, 52, 57);
+        --gray-100: rgb(91, 99, 115);
+        --gray-200: rgb(108, 120, 137);
+        --gray-300: rgb(120, 134, 152);
+        --gray-400: rgb(138, 153, 167);
+        --gray-500: rgb(161, 175, 185);
+        --gray-600: rgb(179, 191, 199);
+        --gray-700: rgb(218, 223, 227);
+        --gray-800: rgb(234, 237, 239);
+        --gray-900: rgb(243, 244, 247);
+        --gray-999: rgb(250, 250, 250);
+        --gray-999_40: hsla(var(--gray-999), 0.4);
+
+        --accent-light: rgb(187, 201, 219); /* Pigeon Post */
+        --accent-regular: rgb(83, 101, 189); /* Indigo */
+        --accent-dark: rgb(40, 65, 137); /* Bay of Many */
+        --accent-overlay: rgba(83, 101, 189, 0.2); /* Indigo*/
+        --accent-unique: rgb(254, 127, 248);
+        --accent-subtle-overlay: var(--accent-overlay);
+        --accent-text-over: var(--gray-800);
+        --accent-gradient: linear-gradient(
+            45deg,
+            rgb(var(--accent)),
+            rgb(var(--accent-light)) 30%,
+            white 60%
+        );
+
+        --link-color: var(--accent-regular);
+
+        /* Gradients */
+        --gradient-stop-1: var(--accent-light);
+        --gradient-stop-2: var(--accent-regular);
+        --gradient-stop-3: var(--accent-dark);
+        --gradient-dark: linear-gradient(
+            150deg,
+            var(--gray-0),
+            var(--gray-300)
+        );
+        --gradient-subtle: linear-gradient(
+            150deg,
+            var(--gray-900) 20%,
+            var(--gray-999) 150%
+        );
+        --gradient-accent: linear-gradient(
+            150deg,
+            var(--gradient-stop-1),
+            var(--gradient-stop-2),
+            var(--gradient-stop-3) 120%
+        );
+        --gradient-stroke: linear-gradient(
+            180deg,
+            var(--gray-900),
+            var(--gray-700)
+        );
+
+        /* Shadows */
+        --shadow-sm: 0px 6px 3px rgba(29, 27, 86, 0.01),
+            0px 4px 2px rgba(29, 27, 86, 0.01),
+            0px 2px 2px rgba(29, 27, 86, 0.02),
+            0px 0px 1px rgba(29, 27, 86, 0.03);
+        --shadow-md: 0px 28px 11px rgba(29, 27, 86, 0.01),
+            0px 16px 10px rgba(29, 27, 86, 0.03),
+            0px 7px 7px rgba(29, 27, 86, 0.05),
+            0px 2px 4px rgba(29, 27, 86, 0.06);
+        --shadow-lg: 0px 62px 25px rgba(29, 27, 86, 0.01),
+            0px 35px 21px rgba(29, 27, 86, 0.05),
+            0px 16px 16px rgba(29, 27, 86, 0.1),
+            0px 4px 9px rgba(29, 27, 86, 0.12);
+
+        /* Text Sizes */
+        --text-sm: 0.875rem;
+        --text-base: 1.1rem;
+        --text-md: 1.125rem;
+        --text-lg: 1.25rem;
+        --text-1xl: 3rem;
+        --text-2xl: 2.5rem;
+        --text-3xl: 2rem;
+        --text-4xl: 1.65rem;
+        --text-5xl: 1.45rem;
+        --text-6xl: 1.25rem;
+
+        /* Fonts */
+        --font-system: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+            Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
+            sans-serif;
+        --font-body: "Public Sans", var(--font-system);
+        --font-brand: Rubik, var(--font-system);
+
+        /* Transitions */
+        --theme-transition: 0.4s ease-in-out;
+    }
+
+    :root.theme-dark {
+        --gray-0: rgb(255, 255, 255);
+        --gray-50: rgb(243, 244, 247);
+        --gray-100: rgb(234, 237, 239);
+        --gray-200: rgb(218, 223, 227);
+        --gray-300: rgb(179, 191, 199);
+        --gray-400: rgb(161, 175, 185);
+        --gray-500: rgb(138, 153, 167);
+        --gray-600: rgb(120, 134, 152);
+        --gray-700: rgb(108, 120, 137);
+        --gray-800: rgb(91, 99, 115);
+        --gray-900: rgb(48, 52, 57);
+        --gray-999: rgb(7, 7, 18);
+
+        --accent-light: rgb(82, 126, 174); /* Wedgewood */
+        --accent-regular: rgb(187, 201, 219); /* Lavender Gray */
+        --accent-dark: rgb(207, 252, 227); /* Scandal */
+        --accent-overlay: rgb(198, 196, 225, 0.2); /* Mystic*/
+        --accent-unique: rgb(238, 196, 252);
+        --accent-subtle-overlay: var(--accent-overlay);
+        --accent-text-over: var(--gray-800);
+
+        --link-color: var(--accent-regular);
+
+        /* Gradients */
+        --gradient-stop-1: var(--accent-light);
+        --gradient-stop-2: var(--accent-regular);
+        --gradient-stop-3: var(--accent-dark);
+        --gradient-dark: linear-gradient(
+            150deg,
+            var(--gray-0),
+            var(--gray-300)
+        );
+        --gradient-subtle: linear-gradient(
+            150deg,
+            var(--gray-900) 20%,
+            var(--gray-999) 150%
+        );
+        --gradient-accent: linear-gradient(
+            150deg,
+            var(--gradient-stop-1) 10%,
+            var(--gradient-stop-2),
+            var(--gradient-stop-3) 120%
+        );
+        --gradient-stroke: linear-gradient(
+            180deg,
+            var(--gray-900),
+            var(--gray-700)
+        );
+
+        --shadow-sm: 0px 6px 3px rgba(187, 201, 219, 0.01),
+            0px 4px 2px rgba(187, 201, 219, 0.01),
+            0px 2px 2px rgba(187, 201, 219, 0.02),
+            0px 0px 1px rgba(187, 201, 219, 0.03);
+        --shadow-md: 0px 28px 11px rgba(187, 201, 219, 0.01),
+            0px 16px 10px rgba(187, 201, 219, 0.03),
+            0px 7px 7px rgba(187, 201, 219, 0.05),
+            0px 2px 4px rgba(187, 201, 219, 0.06);
+        --shadow-lg: 0px 62px 25px rgba(187, 201, 219, 0.01),
+            0px 35px 21px rgba(187, 201, 219, 0.05),
+            0px 16px 16px rgba(187, 201, 219, 0.1),
+            0px 4px 9px rgba(187, 201, 219, 0.12);
+    }
+
+    html,
+    body {
+        min-height: 100%;
+        overflow-x: hidden;
+    }
+
+    body {
+        background-color: var(--gray-999);
+        color: var(--gray-200);
+        font-family: var(--font-body);
+        -webkit-font-smoothing: antialiased;
+        line-height: 1.5;
+    }
+
+    main {
+        margin: 0% 2%;
+    }
+
+    *,
+    *::after,
+    *::before {
+        box-sizing: border-box;
+        margin: 0;
+    }
+
+    img {
+        max-width: 100%;
+        height: auto;
+    }
+
+    a {
+        color: var(--link-color);
+        text-decoration: none;
+    }
+
+    a:is(:hover, :focus-within) {
+        text-decoration: underline;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        line-height: 1.1;
+        font-family: var(--font-brand);
+        font-weight: 600;
+        color: var(--gray-100);
+        margin: 2%;
+    }
+
+    h1 {
+        font-size: var(--text-1xl);
+    }
+
+    h2 {
+        font-size: var(--text-2xl);
+    }
+
+    h3 {
+        font-size: var(--text-3xl);
+    }
+
+    h4 {
+        font-size: var(--text-4xl);
+    }
+
+    h5 {
+        font-size: var(--text-5xl);
+    }
+
+    h6 {
+        font-size: var(--text-6xl);
+    }
+
+    figure {
+        margin-top: 2%;
+        font-style: italic;
+    }
+    figcaption {
+        font-style: italic;
+        margin-bottom: 2%;
+    }
+
+    p {
+        margin: 2%;
+        font-size: var(--text-base);
+    }
+
+    /* Utilities */
+
+    .sr-only {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border-width: 0;
+    }
+
+    .wrapper {
+        width: 100%;
+        max-width: 83rem;
+        margin-inline: auto;
+        padding-inline: 1.5rem;
+    }
+
+    .stack {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .gap-2 {
+        gap: 0.5rem;
+    }
+    .gap-4 {
+        gap: 1rem;
+    }
+    .gap-8 {
+        gap: 2rem;
+    }
+    .gap-10 {
+        gap: 2.5rem;
+    }
+    .gap-15 {
+        gap: 3.75rem;
+    }
+    .gap-20 {
+        gap: 5rem;
+    }
+    .gap-30 {
+        gap: 7.5rem;
+    }
+    .gap-48 {
+        gap: 12rem;
+    }
+
+    @media (min-width: 50em) {
+        .lg\:gap-2 {
+            gap: 0.5rem;
+        }
+        .lg\:gap-4 {
+            gap: 1rem;
+        }
+        .lg\:gap-8 {
+            gap: 2rem;
+        }
+        .lg\:gap-10 {
+            gap: 2.5rem;
+        }
+        .lg\:gap-15 {
+            gap: 3.75rem;
+        }
+        .lg\:gap-20 {
+            gap: 5rem;
+        }
+        .lg\:gap-30 {
+            gap: 7.5rem;
+        }
+        .lg\:gap-48 {
+            gap: 12rem;
+        }
+    }
+</style>

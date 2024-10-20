@@ -1,0 +1,24 @@
+---
+import Global from "../../layouts/Global.astro";
+import Card from "../../components/Card.astro";
+---
+
+<Global title="Home" description="Homepge of HALQME Portfolio and Blog page">
+    <h1>My works</h1>
+    <ul role="list" class="link-card-grid">
+        <Card href="items/leaQs" title="leaQs" body="HOHHAAAAAAAAOHOGE" />
+        <Card
+            href="items/Ranova"
+            title="Documentation"
+            body="Learn how Astro works and explore the official API docs."
+        />
+    </ul>
+</Global>
+<style>
+    .link-card-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(24ch, 1fr));
+        gap: 2rem;
+        padding: 0;
+    }
+</style>
